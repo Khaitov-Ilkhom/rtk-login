@@ -1,10 +1,11 @@
 import './App.css'
+import RoutController from "./routes/RoutController.jsx";
 
 function App() {
 
   return (
     <>
-      <h1>Hello world</h1>
+      <RoutController/>
     </>
   )
 }

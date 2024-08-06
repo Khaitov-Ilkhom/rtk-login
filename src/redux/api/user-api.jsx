@@ -8,8 +8,15 @@ const userApi = api.injectEndpoints({
         method: 'POST',
         body
       })
+    }),
+    singUp: build.mutation({
+      query: (body) => ({
+        url: '/auth',
+        method: 'POST',
+        body
+      })
     })
   })
 })
 
-export const {useSingInMutation} = userApi
+export const {useSingInMutation, useSingUpMutation} = userApi
