@@ -2,20 +2,26 @@ import {Button, Checkbox, Form, Input, Typography} from 'antd';
 import {Link, useNavigate} from "react-router-dom";
 import {useSingInMutation} from "../../../redux/api/user-api.jsx";
 import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {signInSlice} from "../../../redux/slices/AuthSlice.jsx";
 
 
 const {Title, Text} = Typography
 
 const Login = () => {
-  const [signIn, {data}] = useSingInMutation()
+  const [signIn, {data, isSuccess, isLoading}] = useSingInMutation()
   const dispatch = useDispatch()
-  console.log(data?.payload)
 
   const navigate = useNavigate()
   const onFinish = (values) => {
     signIn(values)
-    dispatch(signInSlice(data?.payload.token))
   }
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(signInSlice(data?.payload.token))
+      navigate("/")
+    }
+  }, [isSuccess]);
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -81,8 +87,7 @@ const Login = () => {
               span: 24,
             }}
         >
-          <Button className="w-full" type="primary"
-                  htmlType="submit">
+          <Button loading={isLoading} disabled={isLoading} className="w-full" type="primary" htmlType="submit">
             Log In
           </Button>
         </Form.Item>

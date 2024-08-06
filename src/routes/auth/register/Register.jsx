@@ -2,19 +2,26 @@ import {Button, Checkbox, Form, Input, Typography} from 'antd';
 import {Link, useNavigate} from "react-router-dom";
 import {useSingUpMutation} from "../../../redux/api/user-api.jsx";
 import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {singUpSlice} from "../../../redux/slices/AuthSlice.jsx";
 
 
 const {Title, Text} = Typography
 
 const Register = () => {
-  const [singUp, {data}] = useSingUpMutation()
-  // const dispatch = useDispatch()
+  const [singUp, {data, isSuccess, isLoading}] = useSingUpMutation()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const onFinish = async (values) => {
     singUp(values)
-    // dispatch(singUpSlice(data))
-    console.log(data)
   };
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(singUpSlice(data?.payload.token))
+      navigate("/")
+    }
+  }, [isSuccess]);
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -95,7 +102,7 @@ const Register = () => {
               span: 24,
             }}
         >
-          <Button className="w-full" type="primary" htmlType="submit">
+          <Button loading={isLoading} disabled={isLoading} className="w-full" type="primary" htmlType="submit">
             Register
           </Button>
         </Form.Item>
