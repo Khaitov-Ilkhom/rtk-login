@@ -6,6 +6,8 @@ const Home = lazy(() => import("./home/Home.jsx"))
 const Auth = lazy(() => import("./auth/Auth.jsx"))
 const Login = lazy(() => import("./auth/login/Login.jsx"))
 const Register = lazy(() => import("./auth/register/Register.jsx"))
+const Protected = lazy(() => import("./protected/Protected.jsx"))
+const Profile = lazy(() => import("./dashboard/profile/Profile.jsx"))
 
 const RoutController = () => {
 
@@ -28,6 +30,16 @@ const RoutController = () => {
         }
       ]
     },
+    {
+      path: "profile",
+      element: <Suspense><Protected/></Suspense>,
+      children: [
+        {
+          path: "",
+          element: <Suspense><Profile/></Suspense>
+        }
+      ]
+    }
   ])
 }
 export default RoutController

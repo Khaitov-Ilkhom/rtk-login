@@ -19,7 +19,7 @@ const Login = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(signInSlice(data?.payload.token))
-      navigate("/")
+      navigate("/profile")
     }
   }, [isSuccess]);
   const onFinishFailed = (errorInfo) => {
