@@ -1,7 +1,6 @@
-import {Flex, Spin, Typography} from 'antd';
+import {Flex, Spin} from 'antd';
 import {Suspense} from "react";
 
-const {Title} = Typography
 const Loading = () => {
   return (
       <div className="w-full h-screen flex justify-center items-center">

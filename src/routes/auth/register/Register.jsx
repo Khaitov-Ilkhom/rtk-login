@@ -18,7 +18,7 @@ const Register = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(singUpSlice(data?.payload.token))
-      navigate("/profile")
+      navigate("/dashboard")
     }
   }, [isSuccess]);
 

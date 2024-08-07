@@ -19,7 +19,7 @@ const Login = () => {
   useEffect(() => {
     if (isSuccess) {
       dispatch(signInSlice(data?.payload.token))
-      navigate("/profile")
+      navigate("/dashboard")
     }
   }, [isSuccess]);
   const onFinishFailed = (errorInfo) => {
@@ -91,7 +91,7 @@ const Login = () => {
             Log In
           </Button>
         </Form.Item>
-        <Text className="text-center block"> Don't have an account? <Link to="/auth/register">Register</Link></Text>
+        <Text className="text-center block"> Dont have an account? <Link to="/auth/register">Register</Link></Text>
       </Form>
   )
 }

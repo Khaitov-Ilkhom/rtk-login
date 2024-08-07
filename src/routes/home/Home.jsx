@@ -6,7 +6,6 @@ import RenderCard from "../../components/render-card/RenderCard.jsx";
 const {Title} = Typography
 
 const Home = () => {
-  console.log(useProductDataQuery)
   const {data} = useProductDataQuery()
   const payload = data?.payload
 
